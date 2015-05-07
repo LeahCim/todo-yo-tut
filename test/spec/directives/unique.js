@@ -6,15 +6,32 @@ describe('Directive: unique', function () {
   beforeEach(module('todoYoTutApp'));
 
   var element,
-    scope;
+    scope,
+    form;
 
-  beforeEach(inject(function ($rootScope) {
+  beforeEach(inject(function ($compile, $rootScope) {
     scope = $rootScope.$new();
+    scope.todos = ['a', 'b'];
+    element = angular.element(
+      '<form name="form">' +
+        '<input ng-model="todo" name="todo" unique>' +
+      '</form>'
+    );
+    element = $compile(element)(scope);
+    form = scope.form;
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<unique></unique>');
-    element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the unique directive');
-  }));
+  it('should accept unique input', function () {
+    form.todo.$setViewValue('c');
+    scope.$digest();
+    expect(scope.todo).toBe('c');
+    expect(form.todo.$valid).toBe(true);
+  });
+
+  it('should reject duplicate input', function () {
+    form.todo.$setViewValue('b');
+    scope.$digest();
+    expect(scope.todo).toBe(undefined);
+    expect(form.todo.$valid).toBe(false);
+  });
 });

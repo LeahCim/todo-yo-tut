@@ -9,10 +9,16 @@
 angular.module('todoYoTutApp')
   .directive('unique', function () {
     return {
-      template: '<div></div>',
-      restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        element.text('this is the unique directive');
+      restrict: 'A',
+      require: 'ngModel',
+      link: function postLink(scope, element, attrs, ctrl) {
+        ctrl.$validators.unique = function(modelValue, viewValue) {
+          if(scope.todos.indexOf(viewValue) === -1) {
+            return true;
+          } else {
+            return false;
+          }
+        };
       }
     };
   });
