@@ -26,17 +26,29 @@ describe('Controller: MainCtrl', function () {
     var initTodoLen;
     beforeEach(function() {
       initTodoLen = scope.todos.length;
-      scope.todo = 'test';
+    });
+
+    describe('when todo is non-empty', function() {
+      beforeEach(function() {
+        scope.todo = 'test';
+        scope.addTodo();
+      });
+
+      it('should add the todo to list', function() {
+        expect(scope.todos.length).toBe(initTodoLen+1);
+        expect(scope.todos[initTodoLen]).toBe('test');
+      });
+
+      it('should clear scope.todo after adding to list', function() {
+        expect(scope.todo).toBe('');
+      });
+    });
+
+    it('should not add undefined todo to list', function() {
+      scope.todo = undefined;
       scope.addTodo();
-    });
 
-    it('should add a todo to the list', function() {
-      expect(scope.todos.length).toBe(initTodoLen+1);
-      expect(scope.todos[initTodoLen]).toBe('test');
-    });
-
-    it('should clear scope.todo after adding to list', function() {
-      expect(scope.todo).toBe('');
+      expect(scope.todos.length).toBe(initTodoLen);
     });
   });
 });

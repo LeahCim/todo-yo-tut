@@ -16,7 +16,9 @@ angular.module('todoYoTutApp')
     ];
 
     $scope.addTodo = function() {
-      $scope.todos.push($scope.todo);
-      $scope.todo = '';
+      if($scope.todo !== undefined) {
+        $scope.todos.push($scope.todo);
+        $scope.todo = '';
+      }
     };
   });
