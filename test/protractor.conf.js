@@ -13,7 +13,19 @@ exports.config = {
   multiCapabilities: [{
     'browserName': 'firefox'
   }, {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'prefs': {
+        'browser': {
+          'custom_chrome_frame': false
+        },
+        'extensions': {
+          'theme': {
+            'use_system': true
+          }
+        }
+      }
+    }
   }],
 
   // or configure a single browser
