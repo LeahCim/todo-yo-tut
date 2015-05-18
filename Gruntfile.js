@@ -426,10 +426,11 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'newer:jshint',
     'clean:server',
     'wiredep',
     'concurrent:test',
-    'autoprefixer',
+    'autoprefixer:server',
     'connect:test',
     'karma',
     'protractor'
@@ -440,7 +441,7 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    'autoprefixer:dist',
     'concat',
     'ngAnnotate',
     'copy:dist',
@@ -453,8 +454,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
     'test',
-    'build'
+    'connect:livereload',
+    'watch'
   ]);
 };
