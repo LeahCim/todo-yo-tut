@@ -1,3 +1,5 @@
+'use strict';
+
 exports.config = {
   // location of the Selenium JAR file and chromedriver,
   // use these if you installed protractor locally
@@ -11,16 +13,16 @@ exports.config = {
 
   // configure multiple browsers to run tests
   multiCapabilities: [{
-    'browserName': 'firefox'
+    browserName: 'firefox'
   }, {
-    'browserName': 'chrome',
-    'chromeOptions': {
-      'prefs': {
-        'browser': {
+    browserName: 'chrome',
+    chromeOptions: {
+      prefs: {
+        browser: {
           'custom_chrome_frame': false
         },
-        'extensions': {
-          'theme': {
+        extensions: {
+          theme: {
             'use_system': true
           }
         }
@@ -40,5 +42,13 @@ exports.config = {
   baseUrl: 'http://localhost:9001/',
 
   // testing framework, jasmine is the default
-  framework: 'jasmine'
+  framework: 'jasmine2',
+
+  onPrepare: function() {
+    beforeEach(function() {
+      this.addMatchers(require(
+        './e2e/helpers-' + exports.config.framework + '.js'
+      ).customMatchers);
+    });
+  }
 };
