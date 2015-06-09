@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'karma', 'protractor'],
+        tasks: ['newer:jshint:all', 'karma'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
       },
       e2eTest: {
         files: ['test/e2e/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'protractor']
+        tasks: ['newer:jshint:test']
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
@@ -64,8 +64,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: ['protractor']
+        ]
       }
     },
 
