@@ -2,10 +2,14 @@
   <h2>My todos</h2>
 
   <!-- Todos input -->
-  <form role="form" ng-submit="addTodo()">
+  <form role="form" name="form" ng-submit="addTodo()" novalidate>
     <div class="row">
-      <div class="input-group">
-        <input class="form-control" type="text" ng-model="todo" placeholder="What needs to be done?">
+      <div class="input-group" ng-class="{
+             'has-success': form.todo.$valid && form.todo.$dirty,
+             'has-error': form.todo.$invalid && form.todo.$dirty }">
+
+        <input name="todo" class="form-control" type="text" ng-model="todo"
+               required unique placeholder="What needs to be done?">
         <span class="input-group-btn">
           <input class="btn btn-primary" type="submit" value="Add">
         </span>
