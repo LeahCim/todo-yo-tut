@@ -13,7 +13,7 @@ angular.module('todoYoTutApp')
       require: 'ngModel',
       link: function postLink(scope, element, attrs, ctrl) {
         ctrl.$validators.unique = function(modelValue, viewValue) {
-          if(scope.todos.indexOf(viewValue) === -1) {
+          if(scope[attrs.ngModel + 's'].indexOf(viewValue) === -1) {
             return true;
           } else {
             return false;

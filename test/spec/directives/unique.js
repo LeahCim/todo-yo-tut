@@ -11,10 +11,10 @@ describe('Directive: unique', function () {
 
   beforeEach(inject(function ($compile, $rootScope) {
     scope = $rootScope.$new();
-    scope.todos = ['a', 'b'];
+    scope.items = ['a', 'b'];
     element = angular.element(
       '<form name="form">' +
-        '<input ng-model="todo" name="todo" unique>' +
+        '<input ng-model="item" name="item" unique>' +
       '</form>'
     );
     element = $compile(element)(scope);
@@ -22,16 +22,16 @@ describe('Directive: unique', function () {
   }));
 
   it('should accept unique input', function () {
-    form.todo.$setViewValue('c');
+    form.item.$setViewValue('c');
     scope.$digest();
-    expect(scope.todo).toBe('c');
-    expect(form.todo.$valid).toBe(true);
+    expect(scope.item).toBe('c');
+    expect(form.item.$valid).toBe(true);
   });
 
   it('should reject duplicate input', function () {
-    form.todo.$setViewValue('b');
+    form.item.$setViewValue('b');
     scope.$digest();
-    expect(scope.todo).toBe(undefined);
-    expect(form.todo.$valid).toBe(false);
+    expect(scope.item).toBe(undefined);
+    expect(form.item.$valid).toBe(false);
   });
 });
