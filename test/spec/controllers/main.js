@@ -40,7 +40,7 @@ describe('Controller: MainCtrl', function () {
       });
 
       it('should clear scope.todo after adding to list', function() {
-        expect(scope.todo).toBe('');
+        expect(scope.todo).toBe(undefined);
       });
     });
 

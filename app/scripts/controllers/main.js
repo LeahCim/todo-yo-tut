@@ -18,7 +18,7 @@ angular.module('todoYoTutApp')
     $scope.addTodo = function() {
       if($scope.todo !== undefined) {
         $scope.todos.push($scope.todo);
-        $scope.todo = '';
+        $scope.todo = undefined;
       }
     };
   });
